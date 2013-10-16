@@ -46,4 +46,13 @@
 		<servlet-name>Search</servlet-name>
 		<url-pattern>/search</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+		<servlet-name>Reset</servlet-name>
+		<servlet-class>fyp.controllers.Reset</servlet-class>
+  </servlet>
+  <servlet-mapping>
+		<servlet-name>Reset</servlet-name>
+		<url-pattern>/reset</url-pattern>
+  </servlet-mapping>
 </web-app>

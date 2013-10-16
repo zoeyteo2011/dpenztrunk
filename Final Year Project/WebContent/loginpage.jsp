@@ -23,9 +23,16 @@
 					<div class="controls">
 						<button class="btn">Login</button>
 					</div>
+					
 				</div>
 			</form>
-
+			<form name="reset_form" action="reset">
+			<div class="control-group">
+				<div class="controls">
+						<button class="btn">Reset Database</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 
