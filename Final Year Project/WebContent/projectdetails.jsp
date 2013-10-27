@@ -16,12 +16,16 @@
 		ArrayList<String> columnNamesP2 = (ArrayList<String>) request.getAttribute("columnNamesP2");
 		ArrayList<String> dataForColumnsP1 = (ArrayList<String>) request.getAttribute("dataForColumnsP1");
 		ArrayList<String> dataForColumnsP2 = (ArrayList<String>) request.getAttribute("dataForColumnsP2");
+		String saved = (String) request.getAttribute("saved");
+		
 	%>
-	
 		<div class="container" style="padding: 20px;">
 			<div class="pull-right" style="padding-right: 10px;">
-				<table><tr><td>
+				<table><tr><td><%if(saved!=null){
+						%><h4><%=saved %></h4><%
+					}%></td><td>
 				<form action ="homepage"> 
+					
 					<button type="submit" class="btn btn-primary">
 						Back <i class="glyphicon glyphicon-share-alt"></i>
 					</button>
@@ -98,17 +102,23 @@
 											<%}%>
 										</select>
 										
-									<%}else if(columnNameDisplay.equals("Project status")){ %>
-									<select class="form-control" name="status">
-									<option value="<%=projectDetails%>"><%=projectDetails%></option>
-									<%if (!projectDetails.equals("Approved")){%>
-										<option value="Approved">Approved</option>
-									<%}if(!projectDetails.equals("Completed")){%>
-										<option value="Completed">Completed</option>
-									<%}if(!projectDetails.equals("Pending")){%>
-										<option value="Pending">Pending</option>
-									<%}%>
-								</select>
+									<%}else if(columnNameDisplay.equals("Project status")){ 
+											if(session.getAttribute("role").equals("procurement")){
+										%>
+											<select class="form-control" name="status">
+											<option value="<%=projectDetails%>"><%=projectDetails%></option>
+											<%if (!projectDetails.equals("Approved")){%>
+												<option value="Approved">Approved</option>
+											<%}if(!projectDetails.equals("Completed")){%>
+												<option value="Completed">Completed</option>
+											<%}if(!projectDetails.equals("Pending")){%>
+												<option value="Pending">Pending</option>
+											<%}%>
+										</select>
+										<%}else{ %>									
+											<input class="form-control" type="text" name="status" value="<%=projectDetails%>" disabled/>
+											<input type="hidden" name="status" value="<%=projectDetails%>"/>
+										<%} %>	
 								<% }else{%>
 										<input class="form-control" type="text" name="<%=columnName%>" value="<%=projectDetails%>">
 									<% } %>
@@ -160,7 +170,25 @@
 	
 	</div>
 	</form>
-
+	<div class="container" style="padding: 20px;">
+			<div class="pull-right" style="padding-right: 10px;">
+				<table><tr><td>
+				<form action ="homepage"> 
+					<button type="submit" class="btn btn-primary">
+						Back <i class="glyphicon glyphicon-share-alt"></i>
+					</button>
+					<input type=hidden name="xpid" value=<%=session.getAttribute("xpid")%>/>
+				</form>
+			</td>
+				
+			<td>
+				<form action ="editProject" method="post"> 		
+					<button type="submit" class="btn btn-primary">
+						<i class="glyphicon glyphicon-floppy-disk"></i> Save Edits
+					</button>
+					<input type="hidden" name="projectId" value="<%=request.getAttribute("projectId")%>" />
+		</td></tr></table>
+		</div></div>
 </body>
 
 

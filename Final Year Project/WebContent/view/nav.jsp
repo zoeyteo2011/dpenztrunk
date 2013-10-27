@@ -27,13 +27,15 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav">
-           
             <li class="active">
               <a href="homepage?xpid=<%=session.getAttribute("xpid")%>"><i class="glyphicon glyphicon-home"></i> Home</a>
             </li>
-          
-            
+          </ul>
+          <ul class="nav navbar-nav">
            
+            <li class="active">
+              <a href="help.jsp"><i class="glyphicon glyphicon-question-sign"></i>Help</a>
+            </li>
           </ul>
 		<%if(session.getAttribute("xpid") != null) { %>
           <ul class="nav navbar-nav navbar-right">

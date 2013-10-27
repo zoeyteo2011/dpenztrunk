@@ -30,6 +30,8 @@ public class EditProject extends HttpServlet {
 			/*edit project details*/
 			
 			if (request.getParameter("project_name")!=null) {
+				String saved = "Your results are saved!";
+				request.setAttribute("saved",saved);
 				System.out.println("UPDATE projects SET project_name='" +request.getParameter("project_name")+ "',project_status='" +request.getParameter("status")+ "',functional_owner='" +request.getParameter("functional_owner")+ "',assigned_to='" +request.getParameter("assignedTo")+ "',budget_available='" +request.getParameter("budget_available")+ "',project_description='" +request.getParameter("project_description")+ "',exposure_of_customer_or_employee_data='"+request.getParameter("exposure_of_customer_or_employee_data")+ "',outsourcing='"+request.getParameter("outsourcing")+ "',change_and_challenges='" +request.getParameter("change_and_challenges") +"' WHERE project_id='"+projectId+"'");
 				PreparedStatement updateStatement= db.prepareStatement("UPDATE projects SET project_name='" +request.getParameter("project_name")+ "',project_status='" +request.getParameter("status")+ "',functional_owner='" +request.getParameter("functional_owner")+ "',assigned_to='" +request.getParameter("assignedTo")+ "',budget_available='" +request.getParameter("budget_available")+ "',project_description='" +request.getParameter("project_description")+ "',exposure_of_customer_or_employee_data='"+request.getParameter("exposure_of_customer_or_employee_data")+ "',outsourcing='"+request.getParameter("outsourcing")+ "',change_and_challenges='" +request.getParameter("change_and_challenges") +"' WHERE project_id='"+projectId+"'");
 				
@@ -116,7 +118,7 @@ public class EditProject extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		request.getRequestDispatcher("projectdetails.jsp").forward(request, response);
 	}
 	private ArrayList<String> getDataForDB(String columnNamesForSQL,String projectId, Connection db) {

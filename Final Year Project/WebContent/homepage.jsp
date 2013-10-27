@@ -1,7 +1,8 @@
 <%@include file="../view/nav.jsp"%>
 <html>  
 <head>  
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="../js/bootstrap.js"></script>
 </head> 
 <body>  
 	<%@ page import = "java.util.*" %>
@@ -104,7 +105,72 @@
 	</div>
 	
 	</form>
-		
+	<% if(searchProjects!=null) {%>
+	<div class="container" style="padding-bottom:25px;">
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a class="accordion-toggle" data-toggle="collapse"
+							data-parent="#accordion" href="#collapseOne">Searched Projects</a>
+					</h4>
+				</div>
+			</div>
+		</div>
+	<div>
+			<table class="table table-striped table-bordered table-condensed">
+				<thead>
+			        <tr>
+			        	<th>Project ID</th>
+			            <th>Project Name</th>
+			            <th>Functional Owner</th>
+			            <th>Assigned</th>
+			            <th>Status</th>
+			            <th></th>
+			        </tr>
+			    </thead>
+				<tr>
+					<%
+						if(searchProjects!=null) {
+							for (int i = 0; i < searchProjects.size(); i++) {
+					%>
+				
+				
+				<tr>
+
+					<%
+						String projectId = null;
+								ArrayList<String> projectDetails = (ArrayList<String>) searchProjects.get(i);
+								for (int j = 0; j < projectDetails.size(); j++) {
+									String projectDetail = projectDetails.get(j);
+									if (j == 0) {
+										projectId = projectDetail;
+									}
+					%>
+					<td>
+						<%
+							out.println(projectDetail);
+						%>
+					</td>
+					<% 
+				}
+			%><td>
+						<form action="editProject" Method="POST">
+							<button type="submit" class="btn btn-primary">
+								<i class="glyphicon glyphicon-edit"></i> Edit Project <input
+									type="hidden" name="projectId" value="<%=projectId%>" />
+							</button>
+						</form>
+					</td>
+				</tr><%
+			}
+			    }
+			%>
+			
+			 </table>
+		</div>
+	</div>	
+	<%} %>
 	<div class="container" style="padding-bottom:25px;">
 		<div class="panel-group" id="accordion">
 			<div class="panel panel-default">
@@ -165,69 +231,8 @@
 		</div>
 	</div>
 	
-	<div class="container" style="padding-bottom:25px;">
-		<div class="panel-group" id="accordion">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a class="accordion-toggle" data-toggle="collapse"
-							data-parent="#accordion" href="#collapseOne">Other Projects</a>
-					</h4>
-				</div>
-			</div>
-		</div>
-		<div>
-			<table class="table table-striped table-bordered table-condensed">
-				<thead>
-			        <tr>
-			            <th>Project Name</th>
-			            <th>Functional Owner</th>
-			            <th>Assigned</th>
-			            <th>Status</th>
-			            <th></th>
-			        </tr>
-			    </thead>
-				<tr>
-					<%
-						if(searchProjects!=null) {
-							for (int i = 0; i < searchProjects.size(); i++) {
-					%>
-				
-				
-				<tr>
-
-					<%
-						String projectId = null;
-								ArrayList<String> projectDetails = (ArrayList<String>) searchProjects.get(i);
-								for (int j = 0; j < projectDetails.size(); j++) {
-									String projectDetail = projectDetails.get(j);
-									if (j == 0) {
-										projectId = projectDetail;
-									}
-					%>
-					<td>
-						<%
-							out.println(projectDetail);
-						%>
-					</td>
-					<% 
-				}
-			%><td>
-						<form action="editProject" Method="POST">
-							<button type="submit" class="btn btn-primary">
-								<i class="glyphicon glyphicon-edit"></i> Edit Project <input
-									type="hidden" name="projectId" value="<%=projectId%>" />
-							</button>
-						</form>
-					</td>
-				</tr><%
-			}
-			    }
-			%>
-			
-			 </table>
-		</div>
-	</div>
+	
+		
 	
 </body>  
 </html>

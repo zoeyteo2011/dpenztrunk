@@ -57,6 +57,7 @@ public class StartHomepage extends HttpServlet {
 			
 			if(resultRole.next()){
 				role = resultRole.getString(1);
+				session.setAttribute("role", role);
 			}
 			if(role!=null){
 				PreparedStatement statementsForProject = null;
